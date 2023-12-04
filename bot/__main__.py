@@ -132,8 +132,8 @@ async def send_repo_stats(_, query):
     change_log  = 'N/A'
     update_info = ''
     async with xclient() as client:
-        c_url = 'https://api.github.com/repos/Dawn-India/Z-Mirror/commits'
-        v_url = 'https://api.github.com/repos/Dawn-India/Z-Mirror/tags'
+        c_url = 'https://api.github.com/repos/anbuinfosec/Telegram-Mirror-Bot/commits'
+        v_url = 'https://api.github.com/repos/anbuinfosec/Telegram-Mirror-Bot/tags'
         res = await client.get(c_url)
         pns = await client.get(v_url)
         if res.status_code == 200 and pns.status_code == 200:
@@ -252,10 +252,10 @@ async def start(_, message):
     elif config_dict['DM_MODE'] and message.chat.type != message.chat.type.SUPERGROUP:
         start_string = 'Bot Started.\n' \
                        'Now I will send all of your stuffs here.\n' \
-                       'Use me at: @Z_Mirror'
+                       'Join : @anbudevs'
     elif not config_dict['DM_MODE'] and message.chat.type != message.chat.type.SUPERGROUP:
         start_string = 'Sorry, you cannot use me here!\n' \
-                       'Join: @Z_Mirror to use me.\n' \
+                       'Join: @anbudevs\n' \
                        'Thank You'
     else:
         tag = message.from_user.mention
@@ -284,7 +284,10 @@ async def ping(_, message):
     reply = await sendMessage(message, "Pinging...")
     end_time = monotonic()
     ping_time = int((end_time - start_time) * 1000)
-    await editMessage(reply, f'{ping_time} ms')
+    download_speed = st.download() / 1024 / 1024
+    upload_speed = st.upload() / 1024 / 1024
+    await editMessage(reply, f'▣ Ping : {ping_time} ms\n▣ Download : {download_speed:.2f} Mbit/s\n▣ Upload : {upload_speed:.2f} Mbit/s')
+
 
 async def log(_, message):
     await sendFile(message, 'Z_Logs.txt')
