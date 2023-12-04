@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import speedtest
 from datetime import datetime as dt
 from asyncio import create_subprocess_exec, gather
 from os import execl as osexecl
